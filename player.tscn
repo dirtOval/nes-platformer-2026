@@ -14,3 +14,18 @@ shape = SubResource("RectangleShape2D_sh265")
 
 [node name="Polygon2D" type="Polygon2D" parent="." unique_id=995789447]
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1794111453]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1797929164]
+position = Vector2(1, -58)
+zoom = Vector2(0.75, 0.75)
+limit_bottom = 200
+position_smoothing_enabled = true
+position_smoothing_speed = 15.0
+drag_vertical_enabled = true
+drag_top_margin = 0.85
+drag_bottom_margin = 0.0
+editor_draw_drag_margin = true
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

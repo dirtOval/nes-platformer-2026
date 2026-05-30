@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -400.0
+@export var SPEED = 200.0
+@export var JUMP_VELOCITY = -400.0
 
 
 func _physics_process(delta: float) -> void:
@@ -23,3 +23,15 @@ func _physics_process(delta: float) -> void:
     velocity.x = move_toward(velocity.x, 0, SPEED)
 
   move_and_slide()
+
+func die() -> void:
+  var camera = $Camera2D
+  var camera_position = camera.global_position
+  remove_child($Camera2D)
+  get_tree().root.add_child(camera)
+  camera.position_smoothing_enabled = false
+  camera.global_position = camera_position
+  queue_free()
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+  die()
