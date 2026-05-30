@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://0k3yswagkydf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ryoud"]
+
+[node name="Floor" type="Node2D" unique_id=1073057167]
+
+[node name="Area2D" type="StaticBody2D" parent="." unique_id=1496655751]
+collision_layer = 4
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1371906201]
+shape = SubResource("RectangleShape2D_ryoud")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=406279170]
+color = Color(0.5962877, 0.013087906, 0.44491655, 1)
+polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)

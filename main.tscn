@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://c6kcd3is81ij"]
+
+[ext_resource type="PackedScene" uid="uid://0k3yswagkydf" path="res://floor.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dgnv6tkq18p16" path="res://player.tscn" id="2_h2yge"]
+
+[node name="Main" type="Node2D" unique_id=456507446]
+
+[node name="FloorGroup" type="Node2D" parent="." unique_id=1650391637]
+
+[node name="Floor" parent="FloorGroup" unique_id=1073057167 instance=ExtResource("1_0xm2m")]
+position = Vector2(50, 164)
+
+[node name="Floor2" parent="FloorGroup" unique_id=962346981 instance=ExtResource("1_0xm2m")]
+position = Vector2(70, 164)
+
+[node name="Floor3" parent="FloorGroup" unique_id=768760552 instance=ExtResource("1_0xm2m")]
+position = Vector2(90, 164)
+
+[node name="Floor4" parent="FloorGroup" unique_id=1340124505 instance=ExtResource("1_0xm2m")]
+position = Vector2(110, 164)
+
+[node name="Floor5" parent="FloorGroup" unique_id=808242509 instance=ExtResource("1_0xm2m")]
+position = Vector2(130, 164)
+
+[node name="Floor6" parent="FloorGroup" unique_id=1692976585 instance=ExtResource("1_0xm2m")]
+position = Vector2(150, 164)
+
+[node name="Floor7" parent="FloorGroup" unique_id=1824469932 instance=ExtResource("1_0xm2m")]
+position = Vector2(170, 164)
+
+[node name="Floor8" parent="FloorGroup" unique_id=1168039452 instance=ExtResource("1_0xm2m")]
+position = Vector2(190, 164)
+
+[node name="Floor9" parent="FloorGroup" unique_id=1532345531 instance=ExtResource("1_0xm2m")]
+position = Vector2(210, 164)
+
+[node name="Player" parent="." unique_id=780051216 instance=ExtResource("2_h2yge")]
+position = Vector2(123, 86)
