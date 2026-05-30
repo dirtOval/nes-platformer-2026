@@ -8,7 +8,7 @@
 collision_mask = 6
 safe_margin = 0.01
 script = ExtResource("1_4flbx")
-coyote_frames = 3
+coyote_frames = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=867029209]
 shape = SubResource("RectangleShape2D_sh265")
@@ -19,7 +19,7 @@ polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1794111453]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1797929164]
-position = Vector2(1, -58)
+position = Vector2(0, -58)
 zoom = Vector2(0.75, 0.75)
 limit_bottom = 200
 position_smoothing_enabled = true

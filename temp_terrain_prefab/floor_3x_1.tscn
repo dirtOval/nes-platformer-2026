@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bwl6ui3d2rkv7"]
+
+[ext_resource type="PackedScene" uid="uid://0k3yswagkydf" path="res://temp_terrain_prefab/floor.tscn" id="1_a6ri6"]
+
+[node name="Floor3x1" type="Node2D" unique_id=986949322]
+
+[node name="Floor" parent="." unique_id=1073057167 instance=ExtResource("1_a6ri6")]
+
+[node name="Floor2" parent="." unique_id=2066655021 instance=ExtResource("1_a6ri6")]
+position = Vector2(20, 0)
+
+[node name="Floor5" parent="." unique_id=1602837611 instance=ExtResource("1_a6ri6")]
+position = Vector2(-20, 0)
