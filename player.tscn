@@ -8,6 +8,7 @@
 collision_mask = 6
 safe_margin = 0.01
 script = ExtResource("1_4flbx")
+coyote_frames = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=867029209]
 shape = SubResource("RectangleShape2D_sh265")
@@ -27,5 +28,8 @@ drag_vertical_enabled = true
 drag_top_margin = 0.85
 drag_bottom_margin = 0.0
 editor_draw_drag_margin = true
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=840098010]
+process_callback = 0
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -10,7 +10,7 @@ position = Vector2(123, 143)
 SPEED = 300.0
 
 [node name="FloorGroup" type="Node2D" parent="." unique_id=1016533931]
-position = Vector2(596, -239)
+position = Vector2(698, -220)
 
 [node name="Floor" parent="FloorGroup" unique_id=295063543 instance=ExtResource("1_0xm2m")]
 position = Vector2(50, 164)
@@ -70,7 +70,7 @@ position = Vector2(84, 223)
 position = Vector2(104, 223)
 
 [node name="FloorGroup3" type="Node2D" parent="." unique_id=871566847]
-position = Vector2(900, 0)
+position = Vector2(911, 5)
 
 [node name="Floor" parent="FloorGroup3" unique_id=78348059 instance=ExtResource("1_0xm2m")]
 position = Vector2(50, 164)
@@ -100,7 +100,7 @@ position = Vector2(190, 164)
 position = Vector2(210, 164)
 
 [node name="FloorGroup5" type="Node2D" parent="." unique_id=1493487647]
-position = Vector2(830, -66)
+position = Vector2(1165, 5)
 
 [node name="Floor" parent="FloorGroup5" unique_id=881150771 instance=ExtResource("1_0xm2m")]
 position = Vector2(50, 164)
