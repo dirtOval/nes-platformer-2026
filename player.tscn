@@ -6,6 +6,7 @@
 
 [node name="Player" type="CharacterBody2D" unique_id=780051216]
 collision_mask = 6
+safe_margin = 0.01
 script = ExtResource("1_4flbx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=867029209]
