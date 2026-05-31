@@ -2,17 +2,20 @@ extends CharacterBody2D
 
 
 @export var MAX_SPEED = 200.0
-@export var JUMP_VELOCITY = -400
+@export var JUMP_VELOCITY = -500
+@export var WALLJUMP_VELOCITY = -450
 @export var ACCELERATION = 1000
 @export var FRICTION = 1200
 @export var FALL_MODIFIER = 1.1
 @export var JUMP_CUT = 125
 @export var WALLSLIDE_SLOWDOWN = 0.85
-@export var AIR_FRICTION_DIVISOR = 3
+@export var WALLJUMP_INPUT_FREEZE = 0.1
+@export var AIR_FRICTION = 400
 
 
 var on_floor_ref: bool = true
 var human: bool = false
+var can_move: bool = true
 
 #physics process frame are fixed at 60/second
 @export var coyote_frames: int = 6
@@ -20,34 +23,50 @@ var coyote_timer: int = 0
 var walljump_timer: int = 0
 
 func jump(x: float = 0) -> void:
+  #wall jump!
   if x != 0:
-    velocity.x = x * abs(JUMP_VELOCITY)
-    velocity.y = JUMP_VELOCITY
+    #disable player input for a few frames
+    can_move = false
+    velocity.x = x * abs(WALLJUMP_VELOCITY * 0.85)
+    velocity.y = WALLJUMP_VELOCITY
+    await get_tree().create_timer(WALLJUMP_INPUT_FREEZE).timeout
+    can_move = true
+  #regular ol jump
   else:
     velocity.y = JUMP_VELOCITY
     
 func morph() -> void:
   human = not human
-  print(human)
+  print("is human? " + str(human))
   var creature_sprite = $CreaturePolygon
   var human_sprite = $HumanPolygon
+  var collider = $CollisionShape2D
+  var rectangle = collider.shape
   if human:
     creature_sprite.hide()
     human_sprite.show()
+    rectangle.size.y = 40
+    collider.position.y = -10
   else:
     human_sprite.hide()
     creature_sprite.show()
+    rectangle.size.y = 20
+    collider.position.y = 0
     
 
 func _physics_process(delta: float) -> void:
    
   var direction := Input.get_axis("left", "right")
-  if direction:
-    #velocity.x = direction * MAX_SPEED
+  if direction and can_move:
     velocity.x = move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * delta)
   else:
     if not is_on_floor():
-      velocity.x = move_toward(velocity.x, 0, (FRICTION / AIR_FRICTION_DIVISOR) * delta)
+      #if we're rising in the jump we have less control of momentum, more while falling
+      if velocity.y >= 0:
+        velocity.x = move_toward(velocity.x, 0, AIR_FRICTION * delta)
+      else:
+        velocity.x = move_toward(velocity.x, 0, (AIR_FRICTION/2) * delta)
+        
     else:
       velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
     
@@ -63,13 +82,14 @@ func _physics_process(delta: float) -> void:
       
   if Input.is_action_just_pressed("transform"):
     morph()
+    
+  
   # Handle jump.
-  if Input.is_action_just_pressed("jump"):
+  if Input.is_action_just_pressed("jump") and can_move:
     if is_on_floor() or coyote_timer > 0:
       jump()
     if is_on_wall() and not is_on_floor():
         var jump_vector = get_wall_normal()
-        print(jump_vector)
         jump(jump_vector.x)
   if Input.is_action_just_released("jump"):
     if velocity.y <= JUMP_VELOCITY / 3:
