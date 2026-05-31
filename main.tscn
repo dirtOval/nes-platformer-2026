@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://c6kcd3is81ij"]
 
+[ext_resource type="Script" uid="uid://526mqbykk7bu" path="res://main.gd" id="1_7mycd"]
 [ext_resource type="PackedScene" uid="uid://lcbcbixwgkup" path="res://temp_terrain_prefab/floor_5x_1.tscn" id="2_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dgnv6tkq18p16" path="res://player.tscn" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://bajqxoapg0p17" path="res://temp_terrain_prefab/floor_1x3.tscn" id="3_lquwl"]
@@ -7,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://bwl6ui3d2rkv7" path="res://temp_terrain_prefab/floor_3x_1.tscn" id="5_lquwl"]
 
 [node name="Main" type="Node2D" unique_id=456507446]
+script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=780051216 instance=ExtResource("2_h2yge")]
 position = Vector2(123, 143)
-SPEED = 300.0
 
 [node name="Floor5x1" parent="." unique_id=986949322 instance=ExtResource("2_1bvp3")]
 position = Vector2(4, 164)
