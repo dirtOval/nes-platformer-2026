@@ -14,6 +14,7 @@ script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=780051216 instance=ExtResource("2_h2yge")]
 position = Vector2(123, 143)
+AIR_FRICTION_DIVISOR = 2
 
 [node name="Floor5x1" parent="." unique_id=986949322 instance=ExtResource("2_1bvp3")]
 position = Vector2(4, 164)
@@ -139,7 +140,7 @@ position = Vector2(977, -416)
 position = Vector2(1057, -416)
 
 [node name="Floor5x34" parent="." unique_id=1068539271 instance=ExtResource("2_1bvp3")]
-position = Vector2(1137, -34)
+position = Vector2(1146, -34)
 
 [node name="Floor5x37" parent="." unique_id=1976395874 instance=ExtResource("2_1bvp3")]
 position = Vector2(1237, -34)
@@ -160,7 +161,4 @@ position = Vector2(1097, -416)
 position = Vector2(1097, -196)
 
 [node name="Spikes" parent="." unique_id=213414196 instance=ExtResource("8_5vw27")]
-position = Vector2(1062, -34)
-
-[node name="Spikes2" parent="." unique_id=1818296337 instance=ExtResource("8_5vw27")]
-position = Vector2(1042, -14)
+position = Vector2(1041, -34)

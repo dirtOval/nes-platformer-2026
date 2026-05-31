@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://x7eio7v76kb5" path="res://temp_terrain_prefab/spikes.gd" id="1_hjrsi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xmg3c"]
-size = Vector2(50, 17)
+size = Vector2(80, 17)
 
 [node name="Spikes" type="Node2D" unique_id=213414196 groups=["player"]]
 script = ExtResource("1_hjrsi")
@@ -12,30 +12,30 @@ script = ExtResource("1_hjrsi")
 collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1329286704]
-position = Vector2(0, 1.5)
+position = Vector2(15, 1.5)
 shape = SubResource("RectangleShape2D_xmg3c")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=553636943]
-color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
-polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
-
-[node name="Polygon2D2" type="Polygon2D" parent="." unique_id=1675471246]
-position = Vector2(10, 0)
-color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
-polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
-
-[node name="Polygon2D5" type="Polygon2D" parent="." unique_id=430878458]
-position = Vector2(20, 0)
-color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
-polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
-
-[node name="Polygon2D3" type="Polygon2D" parent="." unique_id=810465839]
-position = Vector2(-10, 0)
-color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
-polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
-
 [node name="Polygon2D4" type="Polygon2D" parent="." unique_id=2062127323]
-position = Vector2(-20, 0)
+position = Vector2(-15, 0)
+scale = Vector2(2, 1)
+color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
+polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
+
+[node name="Polygon2D5" type="Polygon2D" parent="." unique_id=10080069]
+position = Vector2(5, 0)
+scale = Vector2(2, 1)
+color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
+polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
+
+[node name="Polygon2D6" type="Polygon2D" parent="." unique_id=1410166078]
+position = Vector2(25, 0)
+scale = Vector2(2, 1)
+color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
+polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
+
+[node name="Polygon2D7" type="Polygon2D" parent="." unique_id=85965966]
+position = Vector2(45, 0)
+scale = Vector2(2, 1)
 color = Color(0.7397895, 1.9372628e-06, 9.62615e-07, 1)
 polygon = PackedVector2Array(-5, 10, 5, 10, 0, -10)
 

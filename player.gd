@@ -8,9 +8,11 @@ extends CharacterBody2D
 @export var FALL_MODIFIER = 1.1
 @export var JUMP_CUT = 125
 @export var WALLSLIDE_SLOWDOWN = 0.85
+@export var AIR_FRICTION_DIVISOR = 3
 
 
-var on_floor_ref = true
+var on_floor_ref: bool = true
+var human: bool = false
 
 #physics process frame are fixed at 60/second
 @export var coyote_frames: int = 6
@@ -24,6 +26,17 @@ func jump(x: float = 0) -> void:
   else:
     velocity.y = JUMP_VELOCITY
     
+func morph() -> void:
+  human = not human
+  print(human)
+  var creature_sprite = $CreaturePolygon
+  var human_sprite = $HumanPolygon
+  if human:
+    creature_sprite.hide()
+    human_sprite.show()
+  else:
+    human_sprite.hide()
+    creature_sprite.show()
     
 
 func _physics_process(delta: float) -> void:
@@ -34,7 +47,7 @@ func _physics_process(delta: float) -> void:
     velocity.x = move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * delta)
   else:
     if not is_on_floor():
-      velocity.x = move_toward(velocity.x, 0, (FRICTION / 3) * delta)
+      velocity.x = move_toward(velocity.x, 0, (FRICTION / AIR_FRICTION_DIVISOR) * delta)
     else:
       velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
     
@@ -47,7 +60,9 @@ func _physics_process(delta: float) -> void:
       velocity.y += (gravity.y + FALL_MODIFIER) * delta
     else:
       velocity.y += gravity.y * delta
-    
+      
+  if Input.is_action_just_pressed("transform"):
+    morph()
   # Handle jump.
   if Input.is_action_just_pressed("jump"):
     if is_on_floor() or coyote_timer > 0:

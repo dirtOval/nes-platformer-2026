@@ -19,8 +19,14 @@ coyote_frames = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=867029209]
 shape = SubResource("RectangleShape2D_sh265")
 
-[node name="Polygon2D" type="Polygon2D" parent="." unique_id=995789447]
+[node name="CreaturePolygon" type="Polygon2D" parent="." unique_id=995789447]
+color = Color(0.36178893, 0.55236906, 0.88254094, 1)
 polygon = PackedVector2Array(-10, -10, 10, -10, 10, 10, -10, 10)
+
+[node name="HumanPolygon" type="Polygon2D" parent="." unique_id=29484388]
+visible = false
+color = Color(0.71877205, 0.78881174, 0.19670668, 1)
+polygon = PackedVector2Array(-10, -30, 10, -30, 10, 10, -10, 10)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1794111453]
 
