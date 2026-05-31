@@ -5,6 +5,8 @@ extends CharacterBody2D
 @export var JUMP_VELOCITY = -400
 @export var ACCELERATION = 1000
 @export var FRICTION = 1200
+@export var FALL_MODIFIER = 1.1
+@export var JUMP_CUT = 125
 
 
 var on_floor_ref = true
@@ -12,11 +14,19 @@ var on_floor_ref = true
 #physics process frame are fixed at 60/second
 @export var coyote_frames: int = 6
 var coyote_timer: int = 0
+var walljump_timer: int = 0
+
+func jump(x: float = 0) -> void:
+  if x != 0:
+    velocity.x = x * abs(JUMP_VELOCITY)
+    velocity.y = JUMP_VELOCITY
+  else:
+    velocity.y = JUMP_VELOCITY
+    
+    
 
 func _physics_process(delta: float) -> void:
    
-  # Get the input direction and handle the movement/deceleration.
-  # As good practice, you should replace UI actions with custom gameplay actions.
   var direction := Input.get_axis("left", "right")
   if direction:
     #velocity.x = direction * MAX_SPEED
@@ -26,16 +36,32 @@ func _physics_process(delta: float) -> void:
     
   # Add the gravity.
   if not is_on_floor():
-    velocity += get_gravity() * delta
+    var gravity = get_gravity()
+    if velocity.y > 0:
+      velocity.y += (gravity.y + FALL_MODIFIER) * delta
+    else:
+      velocity.y += gravity.y * delta
     
   # Handle jump.
   if Input.is_action_just_pressed("jump"):
     if is_on_floor() or coyote_timer > 0:
-      velocity.y = JUMP_VELOCITY
+      jump()
+    if is_on_wall() and not is_on_floor():
+        var jump_vector = get_wall_normal()
+        print(jump_vector)
+        jump(jump_vector.x)
+  if Input.is_action_just_released("jump"):
+    if velocity.y <= JUMP_VELOCITY / 3:
+      velocity.y += JUMP_CUT
   
+  #Timer decrement zone
   if coyote_timer > 0:
     coyote_timer -= 1
-    
+  if walljump_timer > 0:
+    coyote_timer -= 1
+  
+  #if the last and current is_on_floor return aren't equal and the last one is true,
+  #then the player just left the ground
   if is_on_floor() != on_floor_ref:
     if on_floor_ref == true:
       coyote_timer = coyote_frames

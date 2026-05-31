@@ -10,8 +10,9 @@ safe_margin = 0.01
 script = ExtResource("1_4flbx")
 MAX_SPEED = 300.0
 JUMP_VELOCITY = -500
-ACCELERATION = 1500
+ACCELERATION = 3250
 FRICTION = 2400
+FALL_MODIFIER = 145.0
 coyote_frames = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=867029209]

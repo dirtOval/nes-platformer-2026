@@ -20,16 +20,16 @@ position = Vector2(4, 164)
 position = Vector2(104, 164)
 
 [node name="Floor5x4" parent="." unique_id=1381217222 instance=ExtResource("2_1bvp3")]
-position = Vector2(317, 104)
+position = Vector2(317, 82)
 
 [node name="Floor5x5" parent="." unique_id=801325252 instance=ExtResource("2_1bvp3")]
-position = Vector2(417, 104)
+position = Vector2(417, 82)
 
 [node name="Floor5x6" parent="." unique_id=1256397204 instance=ExtResource("2_1bvp3")]
-position = Vector2(517, 104)
+position = Vector2(517, 82)
 
 [node name="Floor1x3" parent="." unique_id=1008131700 instance=ExtResource("3_lquwl")]
-position = Vector2(257, 124)
+position = Vector2(257, 102)
 
 [node name="Floor5x3" parent="." unique_id=576157984 instance=ExtResource("4_1bvp3")]
 position = Vector2(-36, 104)
@@ -38,55 +38,58 @@ position = Vector2(-36, 104)
 position = Vector2(-36, 4)
 
 [node name="Floor5x8" parent="." unique_id=1142487977 instance=ExtResource("2_1bvp3")]
-position = Vector2(297, 163)
+position = Vector2(297, 141)
 
 [node name="Floor5x9" parent="." unique_id=883166354 instance=ExtResource("2_1bvp3")]
-position = Vector2(297, -12)
+position = Vector2(297, -54)
 
 [node name="Floor5x10" parent="." unique_id=1918937467 instance=ExtResource("2_1bvp3")]
-position = Vector2(397, -12)
+position = Vector2(397, -54)
 
 [node name="Floor5x12" parent="." unique_id=1201389711 instance=ExtResource("2_1bvp3")]
-position = Vector2(766, 105)
+position = Vector2(766, 83)
 
 [node name="Floor5x13" parent="." unique_id=570285661 instance=ExtResource("2_1bvp3")]
-position = Vector2(866, 105)
+position = Vector2(866, 83)
 
 [node name="Floor5x14" parent="." unique_id=736807301 instance=ExtResource("2_1bvp3")]
-position = Vector2(537, -32)
+position = Vector2(537, -74)
 
 [node name="Floor5x15" parent="." unique_id=1370450692 instance=ExtResource("2_1bvp3")]
-position = Vector2(637, -32)
+position = Vector2(637, -74)
 
 [node name="Floor5x16" parent="." unique_id=1795823548 instance=ExtResource("2_1bvp3")]
-position = Vector2(720, -12)
+position = Vector2(720, -54)
 
 [node name="Floor5x17" parent="." unique_id=1421183939 instance=ExtResource("2_1bvp3")]
-position = Vector2(820, -12)
+position = Vector2(820, -54)
 
 [node name="Floor5x18" parent="." unique_id=1524209188 instance=ExtResource("2_1bvp3")]
-position = Vector2(966, 105)
+position = Vector2(966, 83)
 
 [node name="Floor3x1" parent="." unique_id=99513207 instance=ExtResource("5_lquwl")]
-position = Vector2(477, -12)
+position = Vector2(477, -54)
 
 [node name="Floor5x11" parent="." unique_id=1158421507 instance=ExtResource("4_1bvp3")]
-position = Vector2(257, -72)
+position = Vector2(257, -114)
 
 [node name="Floor5x19" parent="." unique_id=2075204480 instance=ExtResource("4_1bvp3")]
-position = Vector2(1006, 46)
+position = Vector2(1006, 24)
 
 [node name="Floor5x20" parent="." unique_id=2016507859 instance=ExtResource("4_1bvp3")]
-position = Vector2(1006, -52)
+position = Vector2(1006, -74)
 
 [node name="Floor1x4" parent="." unique_id=2099597514 instance=ExtResource("3_lquwl")]
-position = Vector2(1006, -132)
+position = Vector2(1006, -154)
+
+[node name="Floor1x5" parent="." unique_id=133213058 instance=ExtResource("3_lquwl")]
+position = Vector2(1006, -214)
 
 [node name="Floor5x21" parent="." unique_id=2055593935 instance=ExtResource("2_1bvp3")]
-position = Vector2(946, -152)
+position = Vector2(946, -194)
 
 [node name="Floor5x22" parent="." unique_id=1632115144 instance=ExtResource("2_1bvp3")]
-position = Vector2(846, -152)
+position = Vector2(846, -194)
 
 [node name="Floor5x23" parent="." unique_id=807857507 instance=ExtResource("2_1bvp3")]
-position = Vector2(746, -152)
+position = Vector2(746, -194)
