@@ -22,6 +22,10 @@ window/size/viewport_height=224
 window/size/resizable=false
 window/size/borderless=true
 
+[global_group]
+
+player=""
+
 [input]
 
 left={
@@ -61,6 +65,7 @@ reset={
 2d_physics/layer_1="player"
 2d_physics/layer_2="enemies"
 2d_physics/layer_3="terrain"
+2d_physics/layer_4="trap"
 
 [physics]
 

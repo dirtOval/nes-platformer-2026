@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var FRICTION = 1200
 @export var FALL_MODIFIER = 1.1
 @export var JUMP_CUT = 125
+@export var WALLSLIDE_SLOWDOWN = 0.85
 
 
 var on_floor_ref = true
@@ -37,7 +38,9 @@ func _physics_process(delta: float) -> void:
   # Add the gravity.
   if not is_on_floor():
     var gravity = get_gravity()
-    if velocity.y > 0:
+    if is_on_wall() and velocity.y >= 0:
+      velocity.y += (gravity.y * WALLSLIDE_SLOWDOWN) * delta
+    elif velocity.y > 0:
       velocity.y += (gravity.y + FALL_MODIFIER) * delta
     else:
       velocity.y += gravity.y * delta

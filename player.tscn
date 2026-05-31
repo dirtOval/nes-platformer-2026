@@ -4,7 +4,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
 
-[node name="Player" type="CharacterBody2D" unique_id=780051216]
+[node name="Player" type="CharacterBody2D" unique_id=780051216 groups=["player"]]
 collision_mask = 6
 safe_margin = 0.01
 script = ExtResource("1_4flbx")
@@ -12,7 +12,8 @@ MAX_SPEED = 300.0
 JUMP_VELOCITY = -500
 ACCELERATION = 3250
 FRICTION = 2400
-FALL_MODIFIER = 145.0
+FALL_MODIFIER = 200.0
+WALLSLIDE_SLOWDOWN = 0.5
 coyote_frames = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=867029209]
