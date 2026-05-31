@@ -33,7 +33,10 @@ func _physics_process(delta: float) -> void:
     #velocity.x = direction * MAX_SPEED
     velocity.x = move_toward(velocity.x, direction * MAX_SPEED, ACCELERATION * delta)
   else:
-    velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
+    if not is_on_floor():
+      velocity.x = move_toward(velocity.x, 0, (FRICTION / 3) * delta)
+    else:
+      velocity.x = move_toward(velocity.x, 0, FRICTION * delta)
     
   # Add the gravity.
   if not is_on_floor():
