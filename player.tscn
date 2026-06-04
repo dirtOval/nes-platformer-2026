@@ -1,8 +1,71 @@
 [gd_scene format=3 uid="uid://dgnv6tkq18p16"]
 
 [ext_resource type="Script" uid="uid://ctrlg68d8n31h" path="res://player.gd" id="1_4flbx"]
+[ext_resource type="Texture2D" uid="uid://cwluvit7dvsh3" path="res://art/cat_sprite_blue.png" id="2_onrkg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i3pqv"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqtel"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sweqy"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onrkg"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hs0m"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jxqw"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dw050"]
+atlas = ExtResource("2_onrkg")
+region = Rect2(64, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2hs0m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i3pqv")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_hqtel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sweqy")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_onrkg")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_2hs0m")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_1jxqw")
+}, {
+"duration": 0.55,
+"texture": SubResource("AtlasTexture_dw050")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" unique_id=780051216 groups=["player"]]
 collision_mask = 6
@@ -49,5 +112,11 @@ editor_draw_drag_margin = true
 
 [node name="CoyoteTimer" type="Timer" parent="." unique_id=840098010]
 process_callback = 0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=827200898]
+sprite_frames = SubResource("SpriteFrames_2hs0m")
+animation = &"idle"
+frame_progress = 0.73387206
+speed_scale = 0.75
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
