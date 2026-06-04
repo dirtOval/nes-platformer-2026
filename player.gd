@@ -46,6 +46,7 @@ var air_friction = C_AIR_FRICTION
 var on_floor_ref: bool = true
 var human: bool = false
 var can_move: bool = true
+var transforming: bool = false
 
 #physics process frame are fixed at 60/second
 @export var coyote_frames: int = 6
@@ -107,13 +108,16 @@ func morph() -> void:
     active_sprite = human_sprite
     rectangle.size.x = 12
     rectangle.size.y = 28
-    collider.position.y = -10
+    collider.position.y = -14
+    collider.position.x = 2
   else:
     human_sprite.hide()
     cat_sprite.show()
     active_sprite = cat_sprite
-    rectangle.size.y = 20
-    collider.position.y = 0
+    rectangle.size.x = 13
+    rectangle.size.y = 12
+    collider.position.x = 1.5
+    collider.position.y = -6
     
 
 func _physics_process(delta: float) -> void:
@@ -121,7 +125,8 @@ func _physics_process(delta: float) -> void:
   var direction := Input.get_axis("left", "right")
   if direction and can_move:
     velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
-    active_sprite.play('run')
+    if not transforming: 
+      active_sprite.play('run')
     if direction < 0:
       active_sprite.flip_h = true
     elif direction > 0:
@@ -136,11 +141,13 @@ func _physics_process(delta: float) -> void:
         
     else:
       velocity.x = move_toward(velocity.x, 0, friction * delta)
-      active_sprite.play('idle')
+      if not transforming:
+        active_sprite.play('idle')
     
   # Add the gravity.
   if not is_on_floor():
-    active_sprite.play("jump", 1.0, true)
+    if not transforming:
+      active_sprite.play("jump", 1.0, true)
     var gravity = get_gravity()
     if is_on_wall() and velocity.y >= 0:
       velocity.y += (gravity.y * wallslide_slowdown) * delta
@@ -149,15 +156,20 @@ func _physics_process(delta: float) -> void:
     else:
       velocity.y += gravity.y * delta
       
-  if Input.is_action_just_pressed("transform"):
-    active_sprite.play("transform")
+  if Input.is_action_just_pressed("transform") and not transforming:
     morph()
+    active_sprite.play("transform")
+    transforming = true
+    await get_tree().create_timer(.57).timeout
+    transforming = false
+    
     
     
   
   # Handle jump.
   if Input.is_action_just_pressed("jump") and can_move:
-    active_sprite.play('jump')
+    if not transforming:
+      active_sprite.play('jump')
     if is_on_floor() or coyote_timer > 0:
       jump()
     if is_on_wall() and not is_on_floor():
