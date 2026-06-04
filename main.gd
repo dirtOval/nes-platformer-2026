@@ -11,6 +11,6 @@ func _ready() -> void:
 func _process(delta: float) -> void:
   if Input.is_action_just_pressed("reset"):
     print("reset scene")
-    if $Camera2D != null:
-      $Camera2D.queue_free()
+    #if $Camera2D != null:
+      #$Camera2D.queue_free()
     get_tree().reload_current_scene() 

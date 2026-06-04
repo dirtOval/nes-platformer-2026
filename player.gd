@@ -95,29 +95,44 @@ func swap_stats() -> void:
     print('creature stats')
     
 func morph() -> void:
-  human = not human
-  print("is human? " + str(human))
   var cat_sprite = $CatSprite
   var human_sprite = $HumanSprite
   var collider = $CollisionShape2D
   var rectangle = collider.shape
-  swap_stats()
+  active_sprite.play("transform")
+  if human:
+    active_sprite.position.x = 1
+  if not human:
+    active_sprite.position.y = -16
+  transforming = true
+  await get_tree().create_timer(.57).timeout
+  transforming = false
+  human = not human
+  print("is human? " + str(human))
   if human:
     cat_sprite.hide()
     human_sprite.show()
     active_sprite = human_sprite
+    active_sprite.position.x = 2
+    active_sprite.position.y = -16
     rectangle.size.x = 12
     rectangle.size.y = 28
-    collider.position.y = -14
     collider.position.x = 2
+    collider.position.y = -14
   else:
     human_sprite.hide()
     cat_sprite.show()
     active_sprite = cat_sprite
+    active_sprite.position.x = 0
+    active_sprite.position.y = -8
     rectangle.size.x = 13
     rectangle.size.y = 12
     collider.position.x = 1.5
     collider.position.y = -6
+  
+  
+  #finish transformation then change stats
+  swap_stats()
     
 
 func _physics_process(delta: float) -> void:
@@ -158,10 +173,6 @@ func _physics_process(delta: float) -> void:
       
   if Input.is_action_just_pressed("transform") and not transforming:
     morph()
-    active_sprite.play("transform")
-    transforming = true
-    await get_tree().create_timer(.57).timeout
-    transforming = false
     
     
     
