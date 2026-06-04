@@ -14,7 +14,6 @@ script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=780051216 instance=ExtResource("2_h2yge")]
 position = Vector2(123, 143)
-AIR_FRICTION_DIVISOR = 2
 
 [node name="Floor5x1" parent="." unique_id=986949322 instance=ExtResource("2_1bvp3")]
 position = Vector2(4, 164)

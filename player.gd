@@ -27,6 +27,9 @@ extends CharacterBody2D
 @export var H_AIR_FRICTION = 400
 
 #WORKING STATS
+@onready
+var active_sprite = $CatSprite
+
 var speed = C_SPEED
 var jump_velocity = C_JUMP_VELOCITY
 var walljump_velocity = C_WALLJUMP_VELOCITY
@@ -56,6 +59,7 @@ func jump(x: float = 0) -> void:
     can_move = false
     velocity.x = x * abs(C_WALLJUMP_VELOCITY * 0.85)
     velocity.y = C_WALLJUMP_VELOCITY
+    active_sprite.flip_h = not active_sprite.flip_h
     await get_tree().create_timer(C_WALLJUMP_INPUT_FREEZE).timeout
     can_move = true
   #regular ol jump
@@ -92,19 +96,22 @@ func swap_stats() -> void:
 func morph() -> void:
   human = not human
   print("is human? " + str(human))
-  var creature_sprite = $CreaturePolygon
-  var human_sprite = $HumanPolygon
+  var cat_sprite = $CatSprite
+  var human_sprite = $HumanSprite
   var collider = $CollisionShape2D
   var rectangle = collider.shape
   swap_stats()
   if human:
-    creature_sprite.hide()
+    cat_sprite.hide()
     human_sprite.show()
-    rectangle.size.y = 40
+    active_sprite = human_sprite
+    rectangle.size.x = 12
+    rectangle.size.y = 28
     collider.position.y = -10
   else:
     human_sprite.hide()
-    creature_sprite.show()
+    cat_sprite.show()
+    active_sprite = cat_sprite
     rectangle.size.y = 20
     collider.position.y = 0
     
@@ -114,6 +121,11 @@ func _physics_process(delta: float) -> void:
   var direction := Input.get_axis("left", "right")
   if direction and can_move:
     velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
+    active_sprite.play('run')
+    if direction < 0:
+      active_sprite.flip_h = true
+    elif direction > 0:
+      active_sprite.flip_h = false
   else:
     if not is_on_floor():
       #if we're rising in the jump we have less control of momentum, more while falling
@@ -124,9 +136,11 @@ func _physics_process(delta: float) -> void:
         
     else:
       velocity.x = move_toward(velocity.x, 0, friction * delta)
+      active_sprite.play('idle')
     
   # Add the gravity.
   if not is_on_floor():
+    active_sprite.play("jump", 1.0, true)
     var gravity = get_gravity()
     if is_on_wall() and velocity.y >= 0:
       velocity.y += (gravity.y * wallslide_slowdown) * delta
@@ -136,11 +150,14 @@ func _physics_process(delta: float) -> void:
       velocity.y += gravity.y * delta
       
   if Input.is_action_just_pressed("transform"):
+    active_sprite.play("transform")
     morph()
+    
     
   
   # Handle jump.
   if Input.is_action_just_pressed("jump") and can_move:
+    active_sprite.play('jump')
     if is_on_floor() or coyote_timer > 0:
       jump()
     if is_on_wall() and not is_on_floor():
