@@ -15,8 +15,8 @@ extends CharacterBody2D
 
 #HUMAN STATS
 #CREATURE STATS
-@export var H_SPEED = 200.0
-@export var H_JUMP_VELOCITY = -500
+@export var H_SPEED = 100.0
+@export var H_JUMP_VELOCITY = -150
 @export var H_WALLJUMP_VELOCITY = -450
 @export var H_ACCELERATION = 1000
 @export var H_FRICTION = 1200
@@ -58,14 +58,14 @@ func jump(x: float = 0) -> void:
   if x != 0:
     #disable player input for a few frames
     can_move = false
-    velocity.x = x * abs(C_WALLJUMP_VELOCITY * 0.85)
-    velocity.y = C_WALLJUMP_VELOCITY
+    velocity.x = x * abs(walljump_velocity * 0.85)
+    velocity.y = walljump_velocity
     active_sprite.flip_h = not active_sprite.flip_h
-    await get_tree().create_timer(C_WALLJUMP_INPUT_FREEZE).timeout
+    await get_tree().create_timer(walljump_input_freeze).timeout
     can_move = true
   #regular ol jump
   else:
-    velocity.y = C_JUMP_VELOCITY
+    velocity.y = jump_velocity
     
 func swap_stats() -> void:
   if human:
