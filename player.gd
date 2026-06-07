@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 #SHARED STATS
-@export var TRANSFORM_TIMEOUT: float = 5.0
+#@export var TRANSFORM_TIMEOUT: float = 5.0
 
 #CREATURE STATS
 @export var C_SPEED = 300
@@ -57,18 +57,23 @@ var coyote_timer: int = 0
 var walljump_timer: int = 0
 
 func enter_light() -> void:
-  active_sprite.hide()
-  active_sprite = $LitHumanSprite
-  active_sprite.show()
+  in_light = true
+  $TransformTimer.stop()
+  update_sprite()
+  if not human and not transforming:
+    morph()
+  #active_sprite.hide()
+  #active_sprite = $LitHumanSprite
+  #active_sprite.show()
   
 func leave_light() -> void:
-  active_sprite.hide()
-  active_sprite = $HumanSprite
-  active_sprite.show()
-
-func start_transform_timer() -> void:
-  var timer = $TransformTimer
-  timer.start(TRANSFORM_TIMEOUT)
+  in_light = false
+  update_sprite()
+  $TransformTimer.start()
+  print('transform timer start')
+  #active_sprite.hide()
+  #active_sprite = $HumanSprite
+  #active_sprite.show()
   
 func jump(x: float = 0) -> void:
   #wall jump!
@@ -86,7 +91,7 @@ func jump(x: float = 0) -> void:
     
 func swap_stats() -> void:
   if human:
-    print('human stats')
+    #print('human stats')
     speed = H_SPEED
     jump_velocity = H_JUMP_VELOCITY
     walljump_velocity = H_WALLJUMP_VELOCITY
@@ -109,33 +114,68 @@ func swap_stats() -> void:
     wallslide_slowdown = C_WALLSLIDE_SLOWDOWN
     walljump_input_freeze = C_WALLJUMP_INPUT_FREEZE
     air_friction = C_AIR_FRICTION
-    print('creature stats')
+    #print('creature stats')
     
 func morph() -> void:
-  var cat_sprite = $CatSprite
-  var collider = $CollisionShape2D
-  var rectangle = collider.shape
+  #var cat_sprite = $CatSprite
+  #var collider = $CollisionShape2D
+  #var rectangle = collider.shape
   
-  var human_sprite: AnimatedSprite2D
-  if in_light:
-    human_sprite = $LitHumanSprite
-  else:
-    human_sprite = $HumanSprite
+  #var human_sprite: AnimatedSprite2D
+  #if in_light:
+    #human_sprite = $LitHumanSprite
+  #else:
+    #human_sprite = $HumanSprite
   
   active_sprite.play("transform")
-  if human:
-    active_sprite.position.x = 1
-  if not human:
-    active_sprite.position.y = -16
+  #if human:
+    #active_sprite.position.x = 1
+  #if not human:
+    #active_sprite.position.y = -16
   transforming = true
   await get_tree().create_timer(.57).timeout
   transforming = false
   human = not human
   print("is human? " + str(human))
+  update_sprite()
+  #if human:
+    #cat_sprite.hide()    
+    #human_sprite.show()
+    #active_sprite = human_sprite
+    #active_sprite.position.x = 2
+    #active_sprite.position.y = -16
+    #rectangle.size.x = 12
+    #rectangle.size.y = 28
+    #collider.position.x = 2
+    #collider.position.y = -14
+  #else:
+    #human_sprite.hide()
+    #cat_sprite.show()
+    #active_sprite = cat_sprite
+    #active_sprite.position.x = 0
+    #active_sprite.position.y = -8
+    #rectangle.size.x = 13
+    #rectangle.size.y = 12
+    #collider.position.x = 1.5
+    #collider.position.y = -6
+  
+  
+  #finish transformation then change stats
+  swap_stats()
+    
+func update_sprite() -> void:
+  print('sprite update')
+  active_sprite.hide()
+  var flipped = active_sprite.flip_h
+  var collider = $CollisionShape2D
+  var rectangle = collider.shape
   if human:
-    cat_sprite.hide()    
-    human_sprite.show()
-    active_sprite = human_sprite
+    if in_light:
+      print('switching to lit human')
+      active_sprite = $LitHumanSprite
+    else:
+      print('switching to regular human')
+      active_sprite = $HumanSprite
     active_sprite.position.x = 2
     active_sprite.position.y = -16
     rectangle.size.x = 12
@@ -143,20 +183,17 @@ func morph() -> void:
     collider.position.x = 2
     collider.position.y = -14
   else:
-    human_sprite.hide()
-    cat_sprite.show()
-    active_sprite = cat_sprite
+    print('switching to cat')
+    active_sprite = $CatSprite
     active_sprite.position.x = 0
     active_sprite.position.y = -8
     rectangle.size.x = 13
     rectangle.size.y = 12
     collider.position.x = 1.5
     collider.position.y = -6
-  
-  
-  #finish transformation then change stats
-  swap_stats()
-    
+  if flipped:
+    active_sprite.flip_h = true
+  active_sprite.show()
 
 func _physics_process(delta: float) -> void:
    
@@ -247,4 +284,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func _on_transform_timer_timeout() -> void:
-  morph()
+  if human:
+    morph()
