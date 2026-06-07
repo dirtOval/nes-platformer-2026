@@ -3,12 +3,16 @@
 [ext_resource type="Script" uid="uid://btkw2km14pef8" path="res://light_zone.gd" id="1_l4ffd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p8swr"]
-size = Vector2(128, 128)
+size = Vector2(64, 64)
 
 [node name="Light Zone" type="Area2D" unique_id=1591704298]
 script = ExtResource("1_l4ffd")
+x = 64.0
+y = 64.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=841360001]
 shape = SubResource("RectangleShape2D_p8swr")
+debug_color = Color(0.9926277, 1, 0.86793566, 0.41960785)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="property_list_changed" from="." to="." method="_on_property_list_changed"]

@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+
 #CREATURE STATS
 @export var C_SPEED = 300
 @export var C_JUMP_VELOCITY = -500
@@ -14,7 +15,6 @@ extends CharacterBody2D
 
 
 #HUMAN STATS
-#CREATURE STATS
 @export var H_SPEED = 100.0
 @export var H_JUMP_VELOCITY = -150
 @export var H_WALLJUMP_VELOCITY = -450
@@ -47,6 +47,7 @@ var on_floor_ref: bool = true
 var human: bool = false
 var can_move: bool = true
 var transforming: bool = false
+var in_light: bool = false
 
 #physics process frame are fixed at 60/second
 @export var coyote_frames: int = 6

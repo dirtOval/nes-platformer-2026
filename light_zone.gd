@@ -1,17 +1,17 @@
+@tool
 extends Area2D
 
+@export var x: float
+@export var y: float
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-  pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-  pass
-
+func _process(delta):
+  if Engine.is_editor_hint():
+    $CollisionShape2D.shape.size.x = x
+    $CollisionShape2D.shape.size.y = y
+  
 
 func _on_body_entered(body: Node2D) -> void:
   if body.is_in_group('player'):
+    body.in_light = true
     if not body.human and not body.transforming:
       body.morph()
