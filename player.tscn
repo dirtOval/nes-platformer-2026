@@ -482,7 +482,7 @@ process_callback = 0
 [node name="CatSprite" type="AnimatedSprite2D" parent="." unique_id=827200898]
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_2hs0m")
-animation = &"idle"
+animation = &"transform"
 autoplay = "idle"
 speed_scale = 0.75
 
@@ -490,7 +490,7 @@ speed_scale = 0.75
 visible = false
 position = Vector2(2, -16)
 sprite_frames = SubResource("SpriteFrames_q13i1")
-animation = &"idle"
+animation = &"transform"
 autoplay = "idle"
 
 [node name="LitHumanSprite" type="AnimatedSprite2D" parent="." unique_id=1656897892]
@@ -500,4 +500,10 @@ sprite_frames = SubResource("SpriteFrames_q13i1")
 animation = &"transform"
 autoplay = "idle"
 
+[node name="TransformTimer" type="Timer" parent="." unique_id=819956089]
+process_callback = 0
+wait_time = 10.0
+one_shot = true
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="TransformTimer" to="." method="_on_transform_timer_timeout"]

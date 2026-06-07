@@ -1044,3 +1044,5 @@ tile_set = SubResource("TileSet_efxa6")
 [node name="Light Zone" parent="." unique_id=1591704298 instance=ExtResource("10_4c57u")]
 position = Vector2(719, 65)
 y = 128.0
+
+[connection signal="body_exited" from="Light Zone" to="." method="_on_light_zone_body_exited"]

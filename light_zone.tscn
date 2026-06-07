@@ -15,4 +15,5 @@ shape = SubResource("RectangleShape2D_p8swr")
 debug_color = Color(0.9926277, 1, 0.86793566, 0.41960785)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
 [connection signal="property_list_changed" from="." to="." method="_on_property_list_changed"]

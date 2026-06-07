@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+#SHARED STATS
+@export var TRANSFORM_TIMEOUT: float = 5.0
 
 #CREATURE STATS
 @export var C_SPEED = 300
@@ -54,6 +56,20 @@ var in_light: bool = false
 var coyote_timer: int = 0
 var walljump_timer: int = 0
 
+func enter_light() -> void:
+  active_sprite.hide()
+  active_sprite = $LitHumanSprite
+  active_sprite.show()
+  
+func leave_light() -> void:
+  active_sprite.hide()
+  active_sprite = $HumanSprite
+  active_sprite.show()
+
+func start_transform_timer() -> void:
+  var timer = $TransformTimer
+  timer.start(TRANSFORM_TIMEOUT)
+  
 func jump(x: float = 0) -> void:
   #wall jump!
   if x != 0:
@@ -97,9 +113,15 @@ func swap_stats() -> void:
     
 func morph() -> void:
   var cat_sprite = $CatSprite
-  var human_sprite = $HumanSprite
   var collider = $CollisionShape2D
   var rectangle = collider.shape
+  
+  var human_sprite: AnimatedSprite2D
+  if in_light:
+    human_sprite = $LitHumanSprite
+  else:
+    human_sprite = $HumanSprite
+  
   active_sprite.play("transform")
   if human:
     active_sprite.position.x = 1
@@ -111,7 +133,7 @@ func morph() -> void:
   human = not human
   print("is human? " + str(human))
   if human:
-    cat_sprite.hide()
+    cat_sprite.hide()    
     human_sprite.show()
     active_sprite = human_sprite
     active_sprite.position.x = 2
@@ -222,3 +244,7 @@ func die() -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
   die()
+
+
+func _on_transform_timer_timeout() -> void:
+  morph()
