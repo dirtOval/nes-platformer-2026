@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var bullet = load('res://player_bullet.tscn')
+
 #SHARED STATS
 #@export var TRANSFORM_TIMEOUT: float = 5.0
 
@@ -51,6 +53,7 @@ var can_move: bool = true
 var transforming: bool = false
 var in_light: bool = false
 var alive: bool = true
+var animating = false
 
 #physics process frame are fixed at 60/second
 @export var coyote_frames: int = 6
@@ -134,8 +137,10 @@ func morph() -> void:
   #if not human:
     #active_sprite.position.y = -16
   transforming = true
+  animating = true
   await get_tree().create_timer(.57).timeout
   transforming = false
+  animating = false
   human = not human
   print("is human? " + str(human))
   update_sprite()
@@ -201,12 +206,15 @@ func _physics_process(delta: float) -> void:
   var direction := Input.get_axis("left", "right")
   if direction and can_move:
     velocity.x = move_toward(velocity.x, direction * speed, acceleration * delta)
-    if not transforming: 
+    if not animating: 
       active_sprite.play('run')
     if direction < 0:
       active_sprite.flip_h = true
+      $ShootMarker.position.x = -12
     elif direction > 0:
       active_sprite.flip_h = false
+      $ShootMarker.position.x = 12
+      
   else:
     if not is_on_floor():
       #if we're rising in the jump we have less control of momentum, more while falling
@@ -217,12 +225,12 @@ func _physics_process(delta: float) -> void:
         
     else:
       velocity.x = move_toward(velocity.x, 0, friction * delta)
-      if not transforming:
+      if not animating:
         active_sprite.play('idle')
     
   # Add the gravity.
   if not is_on_floor():
-    if not transforming:
+    if not animating:
       active_sprite.play("jump", 1.0, true)
     var gravity = get_gravity()
     if is_on_wall() and velocity.y >= 0:
@@ -235,12 +243,32 @@ func _physics_process(delta: float) -> void:
   if Input.is_action_just_pressed("transform") and not transforming:
     morph()
     
+  #handle shoot
+  if Input.is_action_just_pressed("shoot") and human:
+    var timer = $ShootTimer
+    var marker = $ShootMarker
+    print(marker.position)
+    can_move = false
+    animating = true
+    active_sprite.play('shoot')
+    timer.start(0.08)
+    await timer.timeout
+    var b = bullet.instantiate()
+    if active_sprite.flip_h:
+      b.flipped = true
+    b.global_position = marker.global_position
+    owner.add_child(b)
     
+    
+    timer.start(0.24)
+    await timer.timeout
+    animating = false
+    can_move = true
     
   
   # Handle jump.
   if Input.is_action_just_pressed("jump") and can_move:
-    if not transforming:
+    if not animating:
       active_sprite.play('jump')
     if is_on_floor() or coyote_timer > 0:
       jump()
