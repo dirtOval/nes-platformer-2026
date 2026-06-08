@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cggmts64vh0o2"]
+
+[ext_resource type="Script" uid="uid://bs63m8axybtew" path="res://skeleton.gd" id="1_crlql"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rie6r"]
+size = Vector2(16, 32)
+
+[node name="Skeleton" type="CharacterBody2D" unique_id=1660521867 groups=["enemy"]]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_crlql")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1431001314]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_rie6r")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=1450288347]
+position = Vector2(0, -16)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(-8, -16, 8, -16, 8, 16, -8, 16)

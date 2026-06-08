@@ -269,6 +269,12 @@ func _physics_process(delta: float) -> void:
   on_floor_ref = is_on_floor()
 
   move_and_slide()
+  
+  #handle collisions here after move and slide
+  for i in get_slide_collision_count():
+    var collision = get_slide_collision(i)
+    if collision.get_collider().is_in_group('enemy'):
+      die()
 
 func die() -> void:
   var camera = $Camera2D

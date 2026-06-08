@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://12uaw6n4w4x2" path="res://temp_terrain_prefab/spikes.tscn" id="8_5vw27"]
 [ext_resource type="Texture2D" uid="uid://cr348bnnvvbng" path="res://art/brick_path_tileset_blue.png" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://6pekk46ntyxw" path="res://light_zone.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://cggmts64vh0o2" path="res://skeleton.tscn" id="11_efxa6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4c57u"]
 texture = ExtResource("9_kek77")
@@ -885,7 +886,6 @@ script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=780051216 instance=ExtResource("2_h2yge")]
 position = Vector2(123, 143)
-TRANSFORM_TIMEOUT = 2.5
 
 [node name="obstacle_course" type="Node2D" parent="." unique_id=426294890]
 process_mode = 4
@@ -1045,5 +1045,8 @@ tile_set = SubResource("TileSet_efxa6")
 [node name="Light Zone" parent="." unique_id=1591704298 instance=ExtResource("10_4c57u")]
 position = Vector2(262, 85)
 y = 54.0
+
+[node name="Skeleton" parent="." unique_id=1660521867 instance=ExtResource("11_efxa6")]
+position = Vector2(349, 79)
 
 [connection signal="body_exited" from="Light Zone" to="." method="_on_light_zone_body_exited"]
