@@ -50,6 +50,7 @@ var human: bool = false
 var can_move: bool = true
 var transforming: bool = false
 var in_light: bool = false
+var alive: bool = true
 
 #physics process frame are fixed at 60/second
 @export var coyote_frames: int = 6
@@ -273,10 +274,12 @@ func _physics_process(delta: float) -> void:
   #handle collisions here after move and slide
   for i in get_slide_collision_count():
     var collision = get_slide_collision(i)
-    if collision.get_collider().is_in_group('enemy'):
+    if collision.get_collider().is_in_group('enemy') and alive:
       die()
+      break
 
 func die() -> void:
+  alive = false
   var camera = $Camera2D
   var camera_position = camera.global_position
   remove_child($Camera2D)

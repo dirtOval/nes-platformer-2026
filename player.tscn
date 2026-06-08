@@ -336,6 +336,11 @@ region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_7c55y"]
 animations = [{
+"frames": [],
+"loop": true,
+"name": &"die",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 3.0,
 "texture": SubResource("AtlasTexture_n7ghd")
@@ -708,7 +713,7 @@ speed_scale = 0.75
 visible = false
 position = Vector2(2, -16)
 sprite_frames = SubResource("SpriteFrames_7c55y")
-animation = &"transform"
+animation = &"die"
 
 [node name="LitHumanSprite" type="AnimatedSprite2D" parent="." unique_id=1656897892]
 visible = false
