@@ -1047,6 +1047,7 @@ position = Vector2(262, 85)
 y = 54.0
 
 [node name="Skeleton" parent="." unique_id=1660521867 instance=ExtResource("11_efxa6")]
-position = Vector2(-139, 166)
+position = Vector2(-49, 166)
+path_radius = 100.0
 
 [connection signal="body_exited" from="Light Zone" to="." method="_on_light_zone_body_exited"]
