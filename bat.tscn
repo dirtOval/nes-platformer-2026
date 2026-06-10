@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b6xvvyianh8ri"]
+
+[ext_resource type="Script" uid="uid://besmk3kuw8y3a" path="res://bat.gd" id="1_pb2o4"]
+
+[sub_resource type="Curve2D" id="Curve2D_8e5j1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 0, 73, 65, 0, 0, 0, 0, 0, 65, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pb2o4"]
+size = Vector2(24, 16)
+
+[node name="Bat" type="Path2D" unique_id=251280273]
+curve = SubResource("Curve2D_8e5j1")
+script = ExtResource("1_pb2o4")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=402845411]
+rotates = false
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D" unique_id=1908970793]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D" unique_id=974609769]
+shape = SubResource("RectangleShape2D_pb2o4")
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFollow2D" unique_id=585068499]
+color = Color(1, 0, 1, 1)
+polygon = PackedVector2Array(-12, -8, 12, -8, 12, 8, -12, 8)

@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cr348bnnvvbng" path="res://art/brick_path_tileset_blue.png" id="9_kek77"]
 [ext_resource type="PackedScene" uid="uid://6pekk46ntyxw" path="res://light_zone.tscn" id="10_4c57u"]
 [ext_resource type="PackedScene" uid="uid://cggmts64vh0o2" path="res://skeleton.tscn" id="11_efxa6"]
+[ext_resource type="PackedScene" uid="uid://b6xvvyianh8ri" path="res://bat.tscn" id="12_dg77c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4c57u"]
 texture = ExtResource("9_kek77")
@@ -1049,5 +1050,15 @@ y = 54.0
 [node name="Skeleton" parent="." unique_id=1660521867 instance=ExtResource("11_efxa6")]
 position = Vector2(-49, 166)
 path_radius = 100.0
+
+[node name="Bat" parent="." unique_id=251280273 instance=ExtResource("12_dg77c")]
+position = Vector2(-20, 26)
+
+[node name="Bat2" parent="." unique_id=739671506 instance=ExtResource("12_dg77c")]
+position = Vector2(80, -82)
+clockwise = false
+
+[node name="Bat3" parent="." unique_id=106350505 instance=ExtResource("12_dg77c")]
+position = Vector2(200, -21)
 
 [connection signal="body_exited" from="Light Zone" to="." method="_on_light_zone_body_exited"]
