@@ -1,4 +1,30 @@
 [gd_scene format=3 uid="uid://bqpapbug1m1y6"]
 
-[node name="skeleton_bullet" type="Area2D" unique_id=513470245]
-position = Vector2(0, 1)
+[ext_resource type="Script" uid="uid://0l667qfvfqu4" path="res://skeleton_bullet.gd" id="1_23fmk"]
+
+[sub_resource type="Curve2D" id="Curve2D_7qd50"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, -100, 0, 0, 0, -100, 0, 0, 131, 0)
+}
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_23fmk"]
+radius = 9.0
+
+[node name="skeleton_bullet" type="Path2D" unique_id=1416712739]
+curve = SubResource("Curve2D_7qd50")
+script = ExtResource("1_23fmk")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=554072997]
+rotation = -1.5707964
+
+[node name="pivot" type="Node2D" parent="PathFollow2D" unique_id=331958796]
+
+[node name="Area2D" type="Area2D" parent="PathFollow2D/pivot" unique_id=206514577]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/pivot/Area2D" unique_id=1155079618]
+shape = SubResource("CircleShape2D_23fmk")
+
+[node name="Polygon2D" type="Polygon2D" parent="PathFollow2D/pivot" unique_id=1985201217]
+color = Color(0.21420833, 0.8697133, 0, 1)
+polygon = PackedVector2Array(0, -12, 12, 1, 0, 13, -12, 1)

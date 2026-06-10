@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var bullet = load('res://player_bullet.tscn')
+var bullet = preload('res://player_bullet.tscn')
 
 #SHARED STATS
 #@export var TRANSFORM_TIMEOUT: float = 5.0

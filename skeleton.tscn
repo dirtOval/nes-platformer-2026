@@ -18,3 +18,9 @@ shape = SubResource("RectangleShape2D_rie6r")
 position = Vector2(0, -16)
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(-8, -16, 8, -16, 8, 0, 8, 16, -8, 16)
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=891464812]
+position = Vector2(12, -21)
+
+[node name="CooldownTimer" type="Timer" parent="." unique_id=477396820]
+one_shot = true
