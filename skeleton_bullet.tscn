@@ -1,30 +1,51 @@
 [gd_scene format=3 uid="uid://bqpapbug1m1y6"]
 
 [ext_resource type="Script" uid="uid://0l667qfvfqu4" path="res://skeleton_bullet.gd" id="1_23fmk"]
+[ext_resource type="Texture2D" uid="uid://biqd21p2tjef8" path="res://art/skeleton_bone.png" id="2_wra1y"]
 
-[sub_resource type="Curve2D" id="Curve2D_7qd50"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, -100, 0, 0, 0, -100, 0, 0, 131, 0)
-}
-point_count = 2
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wra1y"]
+size = Vector2(10, 10)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_23fmk"]
-radius = 9.0
+[sub_resource type="AtlasTexture" id="AtlasTexture_74cgs"]
+atlas = ExtResource("2_wra1y")
+region = Rect2(16, 0, 16, 16)
 
-[node name="skeleton_bullet" type="Path2D" unique_id=1416712739]
-curve = SubResource("Curve2D_7qd50")
+[sub_resource type="AtlasTexture" id="AtlasTexture_btfai"]
+atlas = ExtResource("2_wra1y")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fxgdq"]
+atlas = ExtResource("2_wra1y")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mepc4"]
+animations = [{
+"frames": [{
+"duration": 0.65,
+"texture": SubResource("AtlasTexture_74cgs")
+}, {
+"duration": 0.65,
+"texture": SubResource("AtlasTexture_btfai")
+}, {
+"duration": 0.65,
+"texture": SubResource("AtlasTexture_fxgdq")
+}],
+"loop": true,
+"name": &"spin",
+"speed": 5.0
+}]
+
+[node name="SkeletonBullet" type="Area2D" unique_id=416191061]
 script = ExtResource("1_23fmk")
+speed = 125
 
-[node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=554072997]
-rotation = -1.5707964
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=718058061]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_wra1y")
 
-[node name="pivot" type="Node2D" parent="PathFollow2D" unique_id=331958796]
-
-[node name="Area2D" type="Area2D" parent="PathFollow2D/pivot" unique_id=206514577]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/pivot/Area2D" unique_id=1155079618]
-shape = SubResource("CircleShape2D_23fmk")
-
-[node name="Polygon2D" type="Polygon2D" parent="PathFollow2D/pivot" unique_id=1985201217]
-color = Color(0.21420833, 0.8697133, 0, 1)
-polygon = PackedVector2Array(0, -12, 12, 1, 0, 13, -12, 1)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=742215108]
+sprite_frames = SubResource("SpriteFrames_mepc4")
+animation = &"spin"
+autoplay = "spin"
+frame = 1
+frame_progress = 0.7448893
