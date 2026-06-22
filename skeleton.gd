@@ -37,7 +37,10 @@ func shoot() -> void:
   owner.add_child(b)
   if sprite.flip_h:
     b.flipped = true
-  facing_right = not facing_right
+  var coin_flip = randi_range(0, 1)
+  print(coin_flip)
+  if coin_flip == 1:
+    facing_right = not facing_right
   timer.start()
   
 func die() -> void:
