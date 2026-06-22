@@ -887,6 +887,7 @@ script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=780051216 instance=ExtResource("2_h2yge")]
 position = Vector2(123, 143)
+collision_mask = 46
 
 [node name="obstacle_course" type="Node2D" parent="." unique_id=426294890]
 process_mode = 4

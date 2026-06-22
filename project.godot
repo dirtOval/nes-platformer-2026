@@ -29,6 +29,7 @@ window/stretch/scale=2.0
 player=""
 enemy=""
 p_bullet=""
+enemy_bullet=""
 
 [input]
 

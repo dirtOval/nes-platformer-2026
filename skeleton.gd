@@ -30,7 +30,7 @@ func shoot() -> void:
   sprite.play('attack')
   await get_tree().create_timer(.32).timeout
   animating = false
-  var shoot_marker = $Marker2D
+  var shoot_marker = $ShootMarker
   var b = bullet.instantiate()
   b.global_position = shoot_marker.global_position
   #b.target_position = shooting_target
@@ -53,6 +53,7 @@ func _physics_process(delta: float) -> void:
   # Add the gravity.
   if not is_on_floor():
     velocity += get_gravity() * delta
+    
 
   #player detection +
   if timer.is_stopped() and shooting == false:
@@ -80,6 +81,7 @@ func _physics_process(delta: float) -> void:
         #here is where i flip the sprite, when there is one
         sprite.flip_h = true
         facing_right = false
+        $ShootMarker.position.x = -12
       else:
         position += transform.x * speed * delta
     else:
@@ -87,6 +89,7 @@ func _physics_process(delta: float) -> void:
         #flip the spriteee
         sprite.flip_h = false
         facing_right = true
+        $ShootMarker.position.x = 12
       else:
         position -= transform.x * speed * delta
   move_and_slide()

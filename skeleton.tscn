@@ -127,7 +127,7 @@ speed = 85.0
 position = Vector2(0.5, -16)
 shape = SubResource("RectangleShape2D_rie6r")
 
-[node name="Marker2D" type="Marker2D" parent="." unique_id=891464812]
+[node name="ShootMarker" type="Marker2D" parent="." unique_id=891464812]
 position = Vector2(12, -21)
 
 [node name="CooldownTimer" type="Timer" parent="." unique_id=477396820]

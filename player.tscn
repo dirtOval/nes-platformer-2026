@@ -744,7 +744,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" unique_id=780051216 groups=["player"]]
-collision_mask = 6
+collision_mask = 46
 script = ExtResource("1_4flbx")
 C_JUMP_VELOCITY = -450
 C_WALLJUMP_VELOCITY = -425
