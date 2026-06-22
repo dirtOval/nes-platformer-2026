@@ -137,3 +137,7 @@ one_shot = true
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_qv3qp")
 animation = &"attack"
+frame = 3
+frame_progress = 1.0
+
+[connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]

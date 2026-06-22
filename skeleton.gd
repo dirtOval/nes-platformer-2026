@@ -26,8 +26,10 @@ func _ready() -> void:
   
 func shoot() -> void:
   animating = true
-  shooting = false
-  #await get_tree().create_timer(.15).timeout
+  shooting = true
+  sprite.play('attack')
+  await get_tree().create_timer(.32).timeout
+  animating = false
   var shoot_marker = $Marker2D
   var b = bullet.instantiate()
   b.global_position = shoot_marker.global_position
@@ -50,7 +52,7 @@ func _physics_process(delta: float) -> void:
     velocity += get_gravity() * delta
 
   #player detection +
-  if timer.is_stopped():
+  if timer.is_stopped() and shooting == false:
     var vision = sight_range
     if not facing_right:
       vision *= -1
@@ -61,13 +63,14 @@ func _physics_process(delta: float) -> void:
     query.exclude = [self]
     var result = space_state.intersect_ray(query)
     if result and result.collider.is_in_group('player'):
-      shooting = true
+      print('pew!')
+      #shooting = true
       #shooting_target = result.position
       #print(shooting_target)
       shoot()
     
   #movement along path
-  if can_move and not shooting:
+  if can_move and not animating:
     sprite.play('walk')
     if facing_right:
       if position.x >= anchor_position + path_radius:
@@ -89,3 +92,7 @@ func _physics_process(delta: float) -> void:
     #if collision.get_collider().is_in_group('p_bullet'):
       #queue_free
       #break
+
+
+func _on_cooldown_timer_timeout() -> void:
+  shooting = false
