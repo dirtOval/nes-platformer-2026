@@ -1,6 +1,8 @@
 extends Area2D
 
-@export var speed = 100
+@export var speed = 175
+@export var drop_rate = .25
+var flight_time: float = 0
 
 var flipped: bool = false
 #var target_position: Vector2
@@ -20,7 +22,11 @@ func _physics_process(delta: float) -> void:
   #
   #if path_follow_2d.progress_ratio >= 0.98: queue_free()
   #path_follow_2d.progress += speed * delta
+  flight_time += delta
   if flipped:
     position -= transform.x * speed * delta 
   else:
     position += transform.x * speed * delta
+  
+  #position.y = position.y + (sin(delta) * 10)
+  position.y +=  flight_time / 3
