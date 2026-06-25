@@ -19,8 +19,8 @@ var bullet = preload('res://player_bullet.tscn')
 
 
 #HUMAN STATS
-@export var H_SPEED = 100.0
-@export var H_JUMP_VELOCITY = -150
+@export var H_SPEED = 125.0
+@export var H_JUMP_VELOCITY = -175
 @export var H_WALLJUMP_VELOCITY = -450
 @export var H_ACCELERATION = 1000
 @export var H_FRICTION = 1200

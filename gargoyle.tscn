@@ -1,8 +1,36 @@
 [gd_scene format=3 uid="uid://cwflcs7wx5y3p"]
 
+[ext_resource type="Texture2D" uid="uid://cr348bnnvvbng" path="res://art/brick_path_tileset_blue.png" id="1_s8p6q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5svms"]
+atlas = ExtResource("1_s8p6q")
+region = Rect2(16, 144, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt20r"]
+atlas = ExtResource("1_s8p6q")
+region = Rect2(49, 144, 32, 32)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_64kek"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5svms")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt20r")
+}],
+"loop": false,
+"name": &"shoot",
+"speed": 5.0
+}]
 
 [node name="Gargoyle" type="Node2D" unique_id=717684787]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=44392395]
 sprite_frames = SubResource("SpriteFrames_64kek")
+animation = &"idle"
