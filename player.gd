@@ -92,6 +92,7 @@ func jump(x: float = 0) -> void:
   #regular ol jump
   else:
     velocity.y = jump_velocity
+  $JumpSound.play()
     
 func swap_stats() -> void:
   if human:
@@ -130,7 +131,7 @@ func morph() -> void:
     #human_sprite = $LitHumanSprite
   #else:
     #human_sprite = $HumanSprite
-  
+  $TransformSound.play()
   active_sprite.play("transform")
   #if human:
     #active_sprite.position.x = 1
@@ -243,8 +244,9 @@ func _physics_process(delta: float) -> void:
   if Input.is_action_just_pressed("transform") and not transforming:
     morph()
     
-  #handle shoot
+  #handle shoot THIS SHOULD BE A FUNCTION
   if Input.is_action_just_pressed("shoot") and human:
+    $ShootSound.play()
     var timer = $ShootTimer
     var marker = $ShootMarker
     print(marker.position)
@@ -277,10 +279,10 @@ func _physics_process(delta: float) -> void:
         jump(jump_vector.x)
   if Input.is_action_just_released("jump"):
     if velocity.y <= jump_velocity / 2:
-      print('bunny hop ' + str(velocity.y))
+      #print('bunny hop ' + str(velocity.y))
       velocity.y += jump_cut * 1.25
     elif velocity.y <= jump_velocity / 3:
-      print('middle jump ' + str(velocity.y))
+      #print('middle jump ' + str(velocity.y))
       
       velocity.y += jump_cut
   
@@ -302,11 +304,15 @@ func _physics_process(delta: float) -> void:
   #handle collisions here after move and slide
   for i in get_slide_collision_count():
     var collision = get_slide_collision(i)
-    if collision.get_collider().is_in_group('enemy') and alive:
+    if collision.get_collider().name != 'TileMapLayer':
+      print(collision.get_collider().name)
+    if collision.get_collider().is_in_group('collide_kill') and alive:
+      print('collision kills! ' + collision.get_collider().name)
       die()
       break
 
 func die() -> void:
+  $DeathSound.play()
   alive = false
   var camera = $Camera2D
   var camera_position = camera.global_position
@@ -314,7 +320,15 @@ func die() -> void:
   get_tree().root.get_node("Main").add_child(camera)
   camera.position_smoothing_enabled = false
   camera.global_position = camera_position
+  active_sprite.play('die')
+  animating = true
+  if human:
+    await get_tree().create_timer(1.16).timeout
+  else:
+    await get_tree().create_timer(.45).timeout
+  animating = false
   queue_free()
+  
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
   die()

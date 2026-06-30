@@ -12,6 +12,7 @@ var flipped: bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
   pass
+  #print(is_in_group('collide_kill'))
   #curve.set_point_out(0, Vector2(target_position.x / 2, - abs(target_position.x)))
   #curve.set_point_out(0, Vector2(0, - abs(target_position.x)))
   #curve.set_point_in(1, Vector2(0, - abs(target_position.x)))
@@ -37,6 +38,8 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-  if body.is_in_group('player'):
+  #this shouldn't stay this way. i don't like this.
+  #figure out collide_kill idiot
+  if body.is_in_group('player') and body.alive:
     body.die()
   queue_free()

@@ -38,15 +38,15 @@ func shoot() -> void:
   if sprite.flip_h:
     b.flipped = true
   var coin_flip = randi_range(0, 1)
-  print(coin_flip)
+  #print(coin_flip)
   if coin_flip == 1:
     facing_right = not facing_right
   timer.start()
   
 func die() -> void:
   can_move = false
-  await get_tree().create_timer(.48).timeout
   sprite.play('die')
+  await get_tree().create_timer(.48).timeout
   queue_free()
   
 func _physics_process(delta: float) -> void:
@@ -67,7 +67,7 @@ func _physics_process(delta: float) -> void:
     query.exclude = [self]
     var result = space_state.intersect_ray(query)
     if result and result.collider.is_in_group('player'):
-      print('pew!')
+      #print('pew!')
       #shooting = true
       #shooting_target = result.position
       #print(shooting_target)

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b6xvvyianh8ri"]
 
 [ext_resource type="Script" uid="uid://besmk3kuw8y3a" path="res://bat.gd" id="1_pb2o4"]
+[ext_resource type="Texture2D" uid="uid://b2fc03sfehaj0" path="res://art/bat_flying.png" id="2_tofr1"]
 
 [sub_resource type="Curve2D" id="Curve2D_8e5j1"]
 _data = {
@@ -9,20 +10,56 @@ _data = {
 point_count = 5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pb2o4"]
-size = Vector2(24, 16)
+size = Vector2(10, 9)
 
-[node name="Bat" type="Path2D" unique_id=251280273]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vobq3"]
+atlas = ExtResource("2_tofr1")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tubu"]
+atlas = ExtResource("2_tofr1")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tecl"]
+atlas = ExtResource("2_tofr1")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jp0fn"]
+animations = [{
+"frames": [{
+"duration": 0.45,
+"texture": SubResource("AtlasTexture_vobq3")
+}, {
+"duration": 0.45,
+"texture": SubResource("AtlasTexture_1tubu")
+}, {
+"duration": 0.45,
+"texture": SubResource("AtlasTexture_3tecl")
+}, {
+"duration": 0.45,
+"texture": SubResource("AtlasTexture_1tubu")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 5.0
+}]
+
+[node name="Bat" type="Path2D" unique_id=251280273 groups=["collide_kill", "enemy"]]
 curve = SubResource("Curve2D_8e5j1")
 script = ExtResource("1_pb2o4")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=402845411]
 rotates = false
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D" unique_id=1908970793]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="PathFollow2D" unique_id=1908970793 groups=["collide_kill", "enemy"]]
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PathFollow2D/CharacterBody2D" unique_id=974609769]
 shape = SubResource("RectangleShape2D_pb2o4")
 
-[node name="Polygon2D" type="Polygon2D" parent="PathFollow2D" unique_id=585068499]
-color = Color(1, 0, 1, 1)
-polygon = PackedVector2Array(-12, -8, 12, -8, 12, 8, -12, 8)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="PathFollow2D" unique_id=365012925 groups=["collide_kill", "enemy"]]
+position = Vector2(-1, -1)
+sprite_frames = SubResource("SpriteFrames_jp0fn")
+animation = &"fly"
+autoplay = "fly"
+frame_progress = 0.77554274

@@ -30,6 +30,7 @@ player=""
 enemy=""
 p_bullet=""
 enemy_bullet=""
+collide_kill=""
 
 [input]
 

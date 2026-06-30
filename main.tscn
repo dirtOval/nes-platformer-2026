@@ -887,7 +887,6 @@ script = ExtResource("1_7mycd")
 
 [node name="Player" parent="." unique_id=780051216 instance=ExtResource("2_h2yge")]
 position = Vector2(123, 143)
-collision_mask = 46
 
 [node name="obstacle_course" type="Node2D" parent="." unique_id=426294890]
 process_mode = 4
@@ -1049,17 +1048,9 @@ position = Vector2(262, 85)
 y = 54.0
 
 [node name="Skeleton" parent="." unique_id=1660521867 instance=ExtResource("11_efxa6")]
-position = Vector2(-49, 166)
-path_radius = 100.0
+position = Vector2(-152, 167)
 
 [node name="Bat" parent="." unique_id=251280273 instance=ExtResource("12_dg77c")]
-position = Vector2(-20, 26)
-
-[node name="Bat2" parent="." unique_id=739671506 instance=ExtResource("12_dg77c")]
-position = Vector2(80, -82)
-clockwise = false
-
-[node name="Bat3" parent="." unique_id=106350505 instance=ExtResource("12_dg77c")]
-position = Vector2(200, -21)
+position = Vector2(356, 35)
 
 [connection signal="body_exited" from="Light Zone" to="." method="_on_light_zone_body_exited"]

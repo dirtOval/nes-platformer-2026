@@ -117,7 +117,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Skeleton" type="CharacterBody2D" unique_id=1660521867 groups=["enemy"]]
+[node name="Skeleton" type="CharacterBody2D" unique_id=1660521867 groups=["collide_kill", "enemy"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_crlql")
@@ -133,11 +133,9 @@ position = Vector2(12, -21)
 [node name="CooldownTimer" type="Timer" parent="." unique_id=477396820]
 one_shot = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=707966473]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=707966473 groups=["collide_kill", "enemy"]]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_qv3qp")
-animation = &"attack"
-frame = 3
-frame_progress = 1.0
+animation = &"die"
 
 [connection signal="timeout" from="CooldownTimer" to="." method="_on_cooldown_timer_timeout"]
