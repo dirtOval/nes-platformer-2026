@@ -15,3 +15,6 @@ func _process(delta: float) -> void:
     #if $Camera2D != null:
       #$Camera2D.queue_free()
     get_tree().reload_current_scene() 
+
+func player_death() -> void:
+  $DeathSound.play()

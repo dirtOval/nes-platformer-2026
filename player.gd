@@ -312,7 +312,7 @@ func _physics_process(delta: float) -> void:
       break
 
 func die() -> void:
-  $DeathSound.play()
+  get_tree().current_scene.get_node('DeathSound').play()
   alive = false
   var camera = $Camera2D
   var camera_position = camera.global_position
